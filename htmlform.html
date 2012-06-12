@@ -1,0 +1,32 @@
+<html>
+<body>
+<center>
+<div id="header" style="background-color:#B80000 ;">
+<h1 style="margin-bottom:0;">Please enter your details</h1></div>
+<link rel="stylesheet" href="mystyle.css">
+<form ACTION="htmlform.html" METHOD=submit>
+First name   :<input type="text" name="firstname" /><br />
+Last name    :<input type="text" name="firstname" /><br />
+Email ID     :<input type="text" name="firstname" /><br />
+Designation  :<input type="text" name="lastname" /><br />
+<button onclick="submit()">Submit</button>
+<button onclick="clear()">Clear</button>
+</form>
+<script name="javascript">
+function clear()
+{
+
+}
+function submit()
+{
+var x=document.forms["myForm"]["fname"].value;
+if (x==null || x=="")
+  {
+  alert("First name must be filled out");
+  return false;
+  }
+}
+</script>
+</center>
+</body>
+</html>
