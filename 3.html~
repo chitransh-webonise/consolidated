@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<center>
+<div id="header" style="background-color:#B80000 ;">
+<h1 style="margin-bottom:0;">Please enter your details</h1></div></br></br>
+<link rel="stylesheet" href="mystyle.css">
+<script type="text/javascript">
+function validateForm()
+{
+var name=document.forms["entry_form"]["fname"].value;
+var mail=document.forms["entry_form"]["fmail"].value;
+var age=document.forms["entry_form"]["fage"].value;
+var address=document.forms["entry_form"]["faddress"].value;
+var description=document.forms["entry_form"]["fdescription"].value;
+var pin=document.forms["entry_form"]["fpin"].value;
+
+if (name==null || name=="")
+  {
+  alert("First name must be filled out");
+  return false;
+  }
+if (mail==null || mail=="")
+  {
+  alert("Email ID cant be left empty");
+  return false;
+  }
+if (age==null || age=="")
+  {
+  alert("Age must be filled out");
+  return false;
+  }
+if (address==null || address=="")
+  {
+  alert("Address must be filled out");
+  return false;
+  }
+if (pin==null || pin=="")
+  {
+  alert("Pin must be filled out");
+  return false;
+  }
+}
+</script>
+</head>
+<body>
+<form name="entry_form" action="3.html" onsubmit="return validateForm()" method="post">
+First name*:</br> <input type="text" name="fname"></br></br></br>
+Email ID*:</br> <input type="text" name="fmail"></br></br></br>
+Age*:</br> <input type="text" name="fage"></br></br></br>
+Address*:</br> <input type="text" name="faddress"></br></br></br>
+Description:</br> <input type="text" name="fdescription"></br></br></br>
+Pincode*:</br> <input type="text" name="fpin"></br></br></br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
