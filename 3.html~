@@ -5,65 +5,117 @@
 <div id="header" style="background-color:#B80000 ;">
 <h1 style="margin-bottom:0;">Please enter your details</h1></div></br></br>
 <link rel="stylesheet" href="mystyle.css">
-<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript"src="jquery-1.7.2.min.js"></script>
 <script language="javascript">
 function validateForm()
 {
-var name=document.forms["entry_form"]["fname"].value;
-var mail=document.forms["entry_form"]["fmail"].value;
-var age=document.forms["entry_form"]["fage"].value;
-var address=document.forms["entry_form"]["faddress"].value;
-var description=document.forms["entry_form"]["fdescription"].value;
-var pin=document.forms["entry_form"]["fpin"].value;
-
-if (name==null || name=="")
+var name = document.entry_form.fname.value
+var mail = document.entry_form.fmail.value
+var age=document.entry_form.fage.value
+var address=document.entry_form.faddress.value
+var gender=document.entry_form.fgender.value
+var description=document.entry_form.fdescription.value
+var pin=document.entry_form.fpin.value
+var str,valid;
+str=" ";
+if(name=="null" || !(isNaN(name)))
   {
-  alert("First name must be filled out");
-  return false;
+    str+="Name must be filled out. \n";
+	valid="false";
   }
 
-if (mail=="")
+ var atpos=mail.indexOf("@");
+  var dotpos=mail.lastIndexOf(".");  
+  if (mail=="")
   {
-alert("Email ID cant be left empty");
-return false;
+      str+="Email field should not be blank. \n";
+      valid="false";
   }
-var mail1=document.forms["entry_form"]["fmail"].value;
-var atpos=mail1.indexOf("@");
-var dotpos=mail1.lastIndexOf(".");
-if(atpos<1 || dotpos<atpos+2 || dotpos+2>=mail1.length)
-{
- alert("Not a valid e-mail address");
-return false;
-}
-
+  else if (atpos<1 || dotpos<atpos+2 || dotpos+2>=mail.length)
+  {
+      str+="Please entre valid email address. \n";
+      valid="false";
+  }
 if (age==null || age=="")
   {
   alert("Age must be filled out");
-  return false;
+  valid="false";
+  }
+  else if (age < 18 || age > 100)
+  {
+   str+="Age should be between 18 and 100. \n";
+      valid="false";
   }
 if (address==null || address=="")
   {
   alert("Address must be filled out");
-  return false;
+  valid="false";
   }
-if (pin==null || pin=="")
+if(pin=="" || (isNaN(pin)))
   {
-  alert("Pin must be filled out");
-  return false;
+    str+="Pincode number field should not be blank or non-numeric. \n";
+	valid="false";
   }
+  else if ((pin.length < 6) || (pin.length > 6)) {
+        str+= "The pincode should be 6 numbers long.\n";
+        valid="false";
+    } 
+    if(valid=="false")
+  {
+	alert(str);
+  }
+  else
+    {        	
+ 
+      		var data1={
+                "utf8":"✓", 
+                "authenticity_token":"TWq5wTGiDBnUuWj3t6Qte9EhTJOWpHViSJYZTLVtsL4=", 
+                "user":{
+                            "name":$('#iname').val().toString(), 
+                            "email":$('#iemail').val().toString(), 
+                            "age":$('#iage').val().toString(), 
+                            "gender":"m",
+                            "address":$('#iaddress').val().toString(), 
+                            "description":$('#idescription').val().toString(), 
+                            "pincode":$('#ipincode').val().toString()
+                            }, 
+                            "commit":"Create User"
+                      };
+          // alert(data1);       
+                  $.ajax({
+                  type: "POST",
+                  url: "http://blooming-beach-2334.herokuapp.com/users",
+                  data: data1,
+                  dataType: "json",
+                  success: alert("success"),
+	})
+					
+      	
+    }
+    alert(data1);
+ 
 }
+
 </script>
 </head>
 <body>
 <form name="entry_form" action="3.html" onsubmit="return validateForm()" method="post">
-First name*:</br> <input type="text" name="fname" id="name"></br></br></br>
-Email ID*:</br> <input type="text" name="fmail" id="email"></br></br></br>
-Age*:</br> <input type="text" name="fage" id="age"></br></br></br>
-Address*:</br> <input type="text" name="faddress" id="address"></br></br></br>
-Description:</br> <input type="text" name="fdescription" id="description"></br></br></br>
-Pincode*:</br> <input type="text" name="fpin" id="pincode"></br></br></br>
+
+Name*:</br> <input type="text" name="fname" id="iname"></br></br></br>
+
+Email ID*:</br> <input type="text" name="fmail" id="iemail"></br></br></br>
+
+Age*:</br> <input type="text" name="fage" id="iage"></br></br></br>
+
+ <label for ="Gender">Gender :  </label><select width=50 id="igender" name="fgender">
+<option value="0" selected="selected">m</option>
+<option value="1">F</option></select><br/><br/><br/>
+Address*:</br> <input type="text" name="faddress" id="iaddress"></br></br></br>
+Description:</br> <input type="text" name="fdescription" id="idescription"></br></br></br>
+Pincode*:</br> <input type="text" name="fpin" id="ipincode"></br></br></br>
 <input type="submit" value="Submit">
 </form>
+</center>
 </body>
 </html>
 
