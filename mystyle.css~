@@ -1,7 +1,5 @@
-body 
-{
+body {
     color: black;
-    background-color: 	#CCFFFF  
-}
+    background-color: 	#CCFFFF  }
 font-family: Georgia, "Times New Roman",
           Times, serif;
